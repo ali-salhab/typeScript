@@ -1,1 +1,0 @@
-## type script is just for type Safety
