@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-let age = 30;
-if (age < 50) {
-    age += 10;
-}
-console.log(age);
+let sales = 12345678;
+let course = "typescript";
+let is_publish = true;
+let level;
 //# sourceMappingURL=index.js.map
