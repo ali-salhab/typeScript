@@ -99,7 +99,7 @@ employee.retire(new Date())
     using type aliases we can define custom type 
 ## example : 
   
-      ``` typescript
+      ```typescript
    type Employee = {
   readonly  id:number,
     name?:string,
@@ -113,7 +113,7 @@ let employee: Employee= {id:1,retire:(date:Date)=>{
    ```
 
 ## 2. Union Type 
- - using union type we can give function or variable more than one type
+ using union type we can give function or variable more than one type
  example  
 function KgtoLbs(weight : number | string ):number {
 
@@ -221,11 +221,13 @@ this code we can simple it using Nullis coaelscing operator ??
    sometime we know more the type of object than type script example of type assertions 
    let phone =document.getElementById('phone') as HTMLInputElement
 
+```typescript 
 console.log(phone.value)
 
 let phone = <HTMLInputElement>document.getElementById('phone') ;
 
 console.log(phone?.value)
+```
 // this functon return either null or HTMLElement
 //  Document.getElementById(elementId: string): HTMLElement | null
 // HTMLElement : is a class defined in java script represent any kind of html element
