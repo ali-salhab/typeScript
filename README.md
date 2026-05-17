@@ -1,454 +1,439 @@
-# TypeScript Course Reference ✈️
+تفضل، هذا هو الملف كاملًا بصيغة **Markdown** الجاهزة للنسخ واللصق مباشرة في ملف `README.md` الخاص بك على GitHub.
 
+```markdown
+# ✈️ TypeScript Mastery Course Reference
 
-# section 1  intoduction to type script 🥈
-## 1.what is typescript ?
- - typescript is a programing language build on the top of javascript 
-![alt text](image.png)
-## 2. benifites 🍱
-1. static typing 
- any programming language eaither statically typing or dynamically typing the type of vaiables is detected throw compile time 
- statically-typed : C++ c# Java
- dynamically-typed the type of variables is detected throw run time and can be changed js is example of this type of programming languages 
-- ** typescript is just javascript with type Checking **
-for example if we create vraiable of type number and assign to it number the compiler will stop us at compile time  
-- install type script compiler 
-<!-- {npm i -g typescript}  -->
-2. code completion
+Welcome to my personal TypeScript reference guide. This repository serves as a comprehensive cheatsheet and memory jogger for TypeScript development, covering everything from basic types to Advanced Object-Oriented Programming (OOP).
 
+---
 
-3.  refactoring
-4. shorthand notations
-# section 2 .Fundametals 
-## 1. Built-in types 
-    1.javascript has this built-in types 
-     number string bollean null undefined object 
-    2. typescript extend this list and introduce this types 
-     any unknown never enum tuple 
-## 2. any type 
-  - the any type represent variable that can take any type 
-## 3. arrays   
- we define array exaclty like java script and annotaed it with its type let example : let mumbers:number[] =[1,2,3]
- ## 4. tuples 
-   key , value pairs 
-   let user:[number,string]=[1,"ali"]
+## 🥈 Section 1: Introduction to TypeScript
 
-   let user:[number , string]=[1,"ali"]
-   console.log(user[0].toFixed())
+### 1. What is TypeScript?
+TypeScript is a strongly typed programming language built on top of JavaScript. It acts as a **syntax sugar** and a **compiler** that adds a static type-checking layer to your development workflow.
 
- ## 5.  enums
-    it represent a list of related constants 
-    ex : enum Sizes{
-    Small,Medieum,Large=12
-}
-console.log(Sizes.Large)
- ## 6. functions   
- ### - example 
- ``` typescript
-function CalculateTax(income:number=12):number | undefined{
-    let x=0;
-    if ((income || 2022) < 50_000){
-        return income* 45 + x;
+### 2. Key Benefits 🍱
+*   **Static Typing:** 
+    *   **Statically-typed** languages (e.g., C++, C#, Java) detect variable types at **compile-time**.
+    *   **Dynamically-typed** languages (e.g., JavaScript) detect types at **runtime**, allowing variables to change types dynamically.
+    *   > **Core Concept:** TypeScript is just JavaScript with **compile-time type checking**. If you assign a string to a `number` variable, the compiler will catch the error before production.
+*   **IntelliSense & Code Completion:** Get instant suggestions, method documentation, and autocomplete inside your IDE.
+*   **Safe Refactoring:** Rename variables or change function signatures globally without breaking the app blindly.
+*   **Shorthand Notations:** Clean, modern syntax that reduces boilerplate code.
+
+#### Installation
+To install the TypeScript compiler globally on your machine:
+```bash
+npm i -g typescript
+
+```
+
+---
+
+## 📦 Section 2: Fundamentals
+
+### 1. Built-in Types
+
+* **JavaScript primitives:** `number`, `string`, `boolean`, `null`, `undefined`, `object`.
+* **TypeScript additions:** `any`, `unknown`, `never`, `enum`, `tuple`.
+
+### 2. The `any` Type
+
+Represents any type of value. It completely shuts down the type checker. **Avoid using it** as it defeats the purpose of TypeScript.
+
+### 3. Arrays
+
+Defined just like JavaScript arrays, but annotated with a specific type to restrict elements.
+
+```typescript
+let numbers: number[] = [1, 2, 3];
+
+```
+
+### 4. Tuples
+
+A fixed-length array where each element has a **known, fixed type**. Ideal for Key-Value pairs.
+
+```typescript
+let user: [number, string] = [1, "ali"];
+console.log(user[0].toFixed()); // Valid
+
+```
+
+### 5. Enums
+
+Represents a list of related, human-readable constants. By default, values start from 0.
+
+```typescript
+enum Sizes { Small = 1, Medium, Large = 12 }
+console.log(Sizes.Large); // Outputs: 12
+
+```
+
+### 6. Functions
+
+Functions can have strongly typed parameters, default values, optional parameters (`?`), and explicit return types.
+
+```typescript
+function calculateTax(income: number = 50_000): number {
+    if (income < 50_000) {
+        return income * 0.15;
     }
-    // return income * 1.2 ;
-
+    return income * 0.2;
 }
 
-let x = CalculateTax();
-console.log(x)
-```
-we can detect the type of returned type of the function if we dont detect it it can return any thing 
-we can make parameters optional by mark the parameter using ? oprerator in this situation any block in the function will face the error to of be the parameter undefinned we solve it by pass to it default value or by usinh this methof (ParaValue || 2022 )
-    
-## 7. objects 
-### - example 1
-``` typescript
-   let employee:{
-    id:number,
-    name?:string
-} = {id:1}
-employee.name="12";  
-### - example 2
-let employee:{
-  readonly  id:number,
-    name?:string,
-    retire : (date:Date)=> void
-} = {id:1,retire:(date:Date)=>{
-    console.log(date)
-}}
-employee.name="12";
-employee.retire(new Date())
+let tax = calculateTax();
+console.log(tax);
+
 ```
 
-### - detials 
- this how we define object in java script 
-   let obj ={}
-   and we cann add any new key,value pair to it during runtime but this is not supported in type script we need to detect the shape of the option durng define it so in the previous exaple we add type annotaion to the object :{id:number , name:string} we add ? to name annotaion to make it optional some time we dont need to make the changing of object propertiy possible so that we use readonly modifier so when we try to change the id of the employee we will get this error Cannot assign to 'id' because it is a read-only property.ts(2540)
-# section 3 : Advanced Types 
-  - type aliases
-  - Unions and intersections
-  - type narrowing 
-  - nullable types 
-  - the unknown type
-  - the never type 
-## 1. Type Aliases
-    DRY principale mean Dont Repeat your Self 
-    when we crate the employee obect in the last section we creat object to annotate the shape of th object 
-    `:{id:number,name?:string,retire:(date:Date)=>void}`
-    when we need to create new object we will repeate this section 
-    using type aliases we can define custom type 
-## example : 
-  
-      ```typescript
-   type Employee = {
-  readonly  id:number,
-    name?:string,
-    retire : (date:Date)=> void
-}
-let employee: Employee= {id:1,retire:(date:Date)=>{
-    console.log(date)
-}}
-    employee.name="12";
-   employee.retire(new Date())
-   ```
+### 7. Objects
 
-## 2. Union Type 
- using union type we can give function or variable more than one type
- example  
-function KgtoLbs(weight : number | string ):number {
+In JavaScript, objects are dynamic (you can add properties anytime). In TypeScript, the **shape** of the object must be declared during definition. You can use `?` for optional properties and `readonly` to prevent modifications.
 
-  // when we try acces weight functions we cant acces string options or numbers options we see only common methods between string and number so we use 
-  // narrowing so we will narrow down this union type to more specific type 
-  if(typeof weight ==='number'){
-   return  parseInt(weight.toFixed());
-  }else{
-  return  parseInt(weight.length.toString());
-  }
+```typescript
+let employee: {
+    readonly id: number,
+    name?: string,
+    retire: (date: Date) => void
+} = {
+    id: 1,
+    retire: (date: Date) => {
+        console.log(date);
+    }
+};
 
-}
+employee.name = "Ali"; // Valid
+// employee.id = 2; // Error: Cannot assign to 'id' because it is a read-only property.
 
+```
 
-KgtoLbs(10);
-KgtoLbs("10 KG")
-## 3. intersections
-  let weight: number & string ;
-// this represent an object which in the same time is number and string 
-// this relaistic is possible 
+---
 
-type Draggable ={
-  drag : ()=> void 
-}
-type ReSizable ={
-resize:()=>void
+## 🚀 Section 3: Advanced Types
+
+### 1. Type Aliases
+
+Follows the **DRY (Don't Repeat Yourself)** principle. Instead of rewriting object shapes repeatedly, define a custom layout alias.
+
+```typescript
+type Employee = {
+    readonly id: number;
+    name: string;
+    retire: (date: Date) => void;
+};
+
+let newEmployee: Employee = {
+    id: 2,
+    name: "Omar",
+    retire: (date) => console.log(date)
+};
+
+```
+
+### 2. Union Types & Narrowing
+
+Unions allow a variable or parameter to accept more than one type using the `|` operator. We use **Type Narrowing** to check the runtime type before accessing type-specific methods.
+
+```typescript
+function kgToLbs(weight: number | string): number {
+    // Narrowing
+    if (typeof weight === 'number') {
+        return weight * 2.2;
+    } else {
+        return parseInt(weight) * 2.2;
+    }
 }
 
-type UiWidget = Draggable & ReSizable;
-let textbox:UiWidget={
-  drag:()=>{},
-  resize:()=>{}
+```
 
-}
-## 4. Literal types 
-let quantity:100 | 20= 1001
-console.log(quantity) 
-here we can assign only 100 or 20 to quantity 
+### 3. Intersection Types
 
-her after restructure the code 
+Combines multiple types using the `&` operator. An object must fulfill all combined type rules.
 
-type Quantity =100 | 20
-let quantity:Quantity = 100
-console.log(quantity)
-## 5. Nullable Types 
-example 
-function greet (name:string|null
-){
-  // here name id truthy not null and not undefined 
-  if (name ) console.log('hello {$name}')
-  else console.log("null or undefined name")
-}
+```typescript
+type Draggable = { drag: () => void };
+type Resizable = { resize: () => void };
 
-greet("null");
-## 6. optional Chaning
-  type Customer={
-  birthdate :Date
-}
+type UIWidget = Draggable & Resizable;
 
-function getCustomer(id:number ):Customer | null{
-  return id === 0 ? null : {
-    birthdate:new Date()
-  } 
-}
-let customer=getCustomer(0);
-console.log(customer.birthdate)
-in this code customer possible be null so we cant access the birthdate with this method so we need to chechk before acces the birthdate 
-if(customer != null && customer !== undefined)
-console.log(customer.birthdate)
-we can replace this condeition with 
-optional property access operator ?.
-optional element access operator ?.[]
-optional call operator ?.()
-type Customer={
-  birthdate? :Date
+let textBox: UIWidget = {
+    drag: () => {},
+    resize: () => {}
+};
+
+```
+
+### 4. Literal Types
+
+Restricts a variable to an **exact set of explicit values** (not just a generic type like number or string).
+
+```typescript
+type Quantity = 20 | 100;
+let quantity: Quantity = 100; // Can only be 20 or 100
+
+```
+
+### 5. Nullable Types
+
+By default, TypeScript is strict about `null` and `undefined`. Use union types to safely handle optional or missing data.
+
+```typescript
+function greet(name: string | null | undefined) {
+    if (name) console.log(`Hello ${name}`);
+    else console.log("Guest User");
 }
 
-function getCustomer(id:number ):Customer | null | undefined{
-  return id === 0 ? null : {
-    birthdate:new Date()
-  } 
-}
-let customer=getCustomer(0);
+```
 
-// ?. optional property access opertor
+### 6. Optional Chaining (`?.`)
 
-// if(customer != null && customer !== undefined)
-console.log(customer?.birthdate?.getFullYear())
-// ?.[]  optional element access operator 
-// console.log(array?.[0])
-// optional call operator 
-let log :any =(a:string)=>{
-  console.log(a)
+Provides a clean syntax to access properties, array elements, or call methods safely when an intermediate value might be `null` or `undefined`.
+
+```typescript
+type Customer = { birthdate?: Date };
+
+function getCustomer(id: number): Customer | null {
+    return id === 0 ? null : { birthdate: new Date() };
 }
-log?.();
-## 7. Nullish coaelscing operator 
-let speed : number | null =null;
+
+let customer = getCustomer(0);
+// Optional property access
+console.log(customer?.birthdate?.getFullYear()); 
+
+```
+
+### 7. Nullish Coalescing Operator (`??`)
+
+Fallback operator that returns the right-side operand **only** if the left-side operand is `null` or `undefined` (unlike `||`, it treats `0` or `""` as valid values).
+
+```typescript
+let speed: number | null = null;
 let ride = {
-  <!-- speed: speed != null ? speed : 30 -->
-  speed : speed?? 30
-}
-this code we can simple it using Nullis coaelscing operator ??
+    speed: speed ?? 30 // Fallback to 30 because speed is null
+};
 
-## 8.Type Assertions 
-   sometime we know more the type of object than type script example of type assertions 
-   let phone =document.getElementById('phone') as HTMLInputElement
-
-```typescript 
-console.log(phone.value)
-
-let phone = <HTMLInputElement>document.getElementById('phone') ;
-
-console.log(phone?.value)
 ```
-// this functon return either null or HTMLElement
-//  Document.getElementById(elementId: string): HTMLElement | null
-// HTMLElement : is a class defined in java script represent any kind of html element
-//  it is parent class for sub classed like HTMLIputElement
-// HTMLIputElement this class conatin property called value to read the value written by the user 
-// but type script donot know this so we use type assertion to access the value of phone 
 
-## 9. the unknowm type
+### 8. Type Assertions
 
- ## example 
-   // the unknown Type 
-function render (document : any ){
-  document.move();
-  document.run();
+Used when you (the developer) know more about the type of an object than TypeScript does. It does not perform any runtime casting.
 
+```typescript
+// Using 'as' keyword
+let phone = document.getElementById('phone') as HTMLInputElement;
+console.log(phone.value);
+
+// Using angle-bracket syntax (Alternative)
+let email = <HTMLInputElement>document.getElementById('email');
+
+```
+
+### 9. The `unknown` Type
+
+A type-safe alternative to `any`. It tells the compiler that the value could be anything, but **forces** you to perform type checking (narrowing) before executing methods on it.
+
+```typescript
+function render(document: unknown) {
+    if (typeof document === 'string') {
+        console.log(document.toUpperCase()); // Safe
+    }
+    // document.move(); // Error: Object is of type 'unknown'
 }
 
-here in this function the parametere document can called for any function name even if this name is not exist in this situation we are telling ts compiler to shut up 
-so we use unknown type to avoid this shut up of comiler and use type narowing to check document type then the compiler know  the type of the documnet in every if block and handle it correcty 
-// the unknown Type 
-function render (document : unknown ){
+```
 
-if (typeof document ==='string'){
-  document.charAt(0);
-}
-  document.move();
-  document.run();
+### 10. The `never` Type
 
+Represents values that **never occur**. Typically used for functions that throw exceptions continuously or run an infinite execution loop.
+
+```typescript
+function reject(message: string): never {
+    throw new Error(message);
 }
 
-## 10.the  never type 
-
-the never type represent value that never occurs 
-example : 
-// we annoutaed this function with never to tell the compiler this function will never return 
-function processEvents():never{
-    while (true){
-        console.log("processing")
-    }
-}
-
-function reject(message:string):never{
-    throw new Error(message)
-}
-processEvents();
-reject("kkkkkk");
-// this line will never executed 
-console.log("hello word ")
-
-# section 4 : object-oriented programming
-** what we will lean ?? **
- 1. intoduction to oop 
- 2. classes 
- 3. constructors 
- 4. properties and methods 
- 5. accesss control keywords 
- 6. getters and setters 
- 7. static members 
- 8. index signatures 
- 9. inheritance 
- 10. polymorphism
- 11. abstract classes 
- 12. interfaces 
-
- ## 1. what is oop(object-oriented programming ) ? 
-   oop is one of many programming styles like 
-   ![alt text](image-1.png)
-
-   js and ts support functional programming and object oriented programming 
-   objects are the building blocks of our application 
-
-   example of object 
-   ![alt text](image-2.png)
-  object conatin  properties and methods ( any function inside class or object called method)
-## 2. classes
-   ** creating Classes **
-   A class is a blueprint for creating objects 
-   we can define class in typescript and we can use it to create objects
-    we use pascal name convention for class name so that we capitalize the first letter of each word in the class name
- 
-
-
-```typescript 
-   class Account{
-    id : number;
-    name : string;
-    balance : number;
-
-    constructor(id:number,name:string,balance:number){
-        this.id=id;
-        this.name=name;
-        this.balance=balance;
-    }
-
-    // any function create inside class we call it method 
-    deposit(amount:number):void{
-        if (amount <= 0){
-            throw new Error("amount must be greater than zero")
-        }else{
-        this.balance +=amount;
-
-        }
-    }   
-    
-  }
-  // using the new operator to create an object from the class
-    let account =new Account(1,"ali",1000);
-    account.deposit(500);
-
-   console.log(account instanceof Account)
-  console.log(account)
-  
-  //  creatin opjects
-  // using the new operator we can create instance of existing class 
-  let account =new Account(1,"ali",1000);
-  account.deposit(500);
-
-    console.log(account)
-  ```
-
-## 3. Read-Only and Optional Properties 
-   * exmple *
-   in the previous examlle we can change the id of the user in any lcaton of our programm and this may lead to bug in our program to solve this problem we use the ** readonly modifier ** now we can only chage the id inside the constructor 
-
-   if we need add optional propertie we can use ? operator 
-   like this 
-   `nickName?:string ;`
-
-## 4. Access Control Keywords :
-   1. public : 
-      any defined properties and functions is bydefault public we can access it from anywhere 
-   2. private 
-      we can access it inside the class only 
-   3. protected 
-      we can access it inside the class and and other class extend this class which contain this protected properties 
-
-    ```typescript
-
-      class Account {
-
-    // we cant change this property we can only init it fron constructor
-      readonly id:number ;
-      owner: string ;
-    // 
-      private _balance: number ;
-      nickname?:string
-    
-      constructor(id:number,owner:string,balance:number){
-        this.id=id;
-        this.owner=owner;
-        this._balance=balance;
-    }
-    deposite(amount : number){
-        if (amount <= 0){
-            throw new Error("amount must be greater than zero")
-        }
-        this._balance +=amount;
-    }
-    get balance(){
-        return this._balance
-    }
-     }
-
-    let account = new Account(1,"ali",1000);
-       account.deposite(122)
-        console.log(account.balance)
-      ```
-
-
-## 5. Parameter Properties 
-   ###### idea 
-         when we create class with peoperties we create the propertis detect it level visisbility using readonly private protected and public then we init in iside the constructor this behaviour is so repetitve the better way is in the example
-  ###### example 
-       ``` typescript 
-       class Account {
-
-    // we cant change this property we can only init it fron constructor
-//    readonly id:number ;
-    // owner: string ;
-    // 
-    // private _balance: number ;
-    nickname?:string
-    
-    constructor(public readonly id:number,public owner:string,private _balance:number){
-        // this.id=id;
-        // this.owner=owner;
-        // this._balance=balance;
-    }
-    deposite(amount : number){
-        if (amount <= 0){
-            throw new Error("amount must be greater than zero")
-        }
-        this._balance +=amount;
-    }
-    get balance(){
-        return this._balance
+function processEvents(): never {
+    while (true) {
+        // Infinite loop
     }
 }
 
-let account = new Account(1,"ali",1000);
-account.deposite(122)
-console.log(account.balance)
+```
 
-       ```       
-## 6. getters and setters 
+---
 
-   ### example 
-   ```typescript
-       get balance(){
-        return this._balance
+## 🏛️ Section 4: Object-Oriented Programming (OOP)
+
+### 1. What is OOP?
+
+Object-Oriented Programming is a paradigm centered around **Objects** containing data (properties) and logic/functions (methods). JavaScript and TypeScript natively support both OOP and Functional Programming styles.
+
+### 2. Classes & Objects
+
+A class is a blueprint, and an object is an instance created from that blueprint using the `new` keyword.
+
+```typescript
+class Account {
+    id: number;
+    owner: string;
+    balance: number;
+
+    constructor(id: number, owner: string, balance: number) {
+        this.id = id;
+        this.owner = owner;
+        this.balance = balance;
     }
-    set balance(value:number){
-        if (value < 0){
-            throw new Error("balance cannot be negative")
-        }
-        this._balance=value;
+
+    deposit(amount: number): void {
+        if (amount <= 0) throw new Error("Amount must be greater than zero.");
+        this.balance += amount;
     }
-   ```
-## 7. classes
-## 8. classes
-## 9. classes
-## 10. classes
-## 11. classes
-## 12. classes
+}
+
+let account = new Account(1, "Ali", 1000);
+account.deposit(500);
+console.log(account instanceof Account); // true
+
+```
+
+### 3. Access Control Keywords
+
+Controls the visibility of class members (properties and methods):
+
+* `public` (Default): Accessible from anywhere.
+* `private`: Accessible only inside the declaring class.
+* `protected`: Accessible inside the declaring class and its subclasses.
+
+### 4. Parameter Properties (Shorthand Syntax)
+
+TypeScript offers a shorthand to declare properties and initialize them directly from the constructor parameters.
+
+```typescript
+class SmartAccount {
+    // Shorthand syntax automatically initializes fields
+    constructor(
+        public readonly id: number, 
+        public owner: string, 
+        private _balance: number
+    ) {}
+}
+
+```
+
+### 5. Getters and Setters
+
+Used to access or mutate private fields safely while adding custom validation logic.
+
+```typescript
+class BankAccount {
+    constructor(private _balance: number) {}
+
+    get balance(): number {
+        return this._balance;
+    }
+
+    set balance(value: number) {
+        if (value < 0) throw new Error("Balance cannot be negative.");
+        this._balance = value;
+    }
+}
+
+```
+
+### 6. Static Members
+
+Properties or methods that belong to the **Class itself**, rather than any specific instantiated object.
+
+```typescript
+class Circle {
+    static pi = 3.14;
+    static calculateArea(radius: number): number {
+        return this.pi * radius * radius;
+    }
+}
+console.log(Circle.pi); // 3.14 (Accessed without 'new' keyword)
+
+```
+
+### 7. Index Signatures
+
+Used when you need to dynamically create object properties but don't know the property names beforehand.
+
+```typescript
+class SeatAssignment {
+    // Index signature: key is a string, value is a string (e.g., A1: "Ali")
+    [seatNumber: string]: string;
+}
+
+let room = new SeatAssignment();
+room.A1 = "Ali";
+room.A2 = "Omar";
+
+```
+
+### 8. Inheritance
+
+The ability to reuse code by creating a new class (subclass) based on an existing class (parent class) using the `extends` keyword.
+
+```typescript
+class Person {
+    constructor(public firstName: string, public lastName: string) {}
+    get fullName() { return `${this.firstName} ${this.lastName}`; }
+}
+
+class Student extends Person {
+    constructor(public studentId: number, firstName: string, lastName: string) {
+        super(firstName, lastName); // Calls parent constructor
+    }
+}
+
+```
+
+### 9. Polymorphism
+
+"Many forms". Allows subclasses to provide their own specific implementation of a method that is already defined in their parent class (Method Overriding).
+
+```typescript
+class Teacher extends Person {
+    override get fullName() {
+        return `Professor ${super.fullName}`;
+    }
+}
+
+```
+
+### 10. Abstract Classes & Methods
+
+An abstract class acts strictly as a blueprint and **cannot be instantiated** with `new`. Abstract methods inside it have no implementation body and **must** be implemented by subclasses.
+
+```typescript
+abstract class Shape {
+    abstract render(): void;
+}
+
+class Square extends Shape {
+    override render(): void { console.log("Rendering a square..."); }
+}
+
+```
+
+### 11. Interfaces
+
+Interfaces define the exact **contract/shape** of an object or class without any implementation logic. Classes implement interfaces using the `implements` keyword.
+
+```typescript
+interface Calendar {
+    name: string;
+    addEvent(): void;
+}
+
+class GoogleCalendar implements Calendar {
+    constructor(public name: string) {}
+    addEvent(): void { console.log("Event added."); }
+}
+
+```
+
+```</HTMLInputElement>
+
+```
