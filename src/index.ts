@@ -225,8 +225,9 @@
 //     }   
     
 // }
-
+// // using the new operator to create an object from the class
 // let account =new Account(1,"ali",1000);
 // account.deposit(500);
 
+// console.log(account instanceof Account)
 // console.log(account)

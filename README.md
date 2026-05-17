@@ -311,7 +311,7 @@ console.log("hello word ")
 
 
    ```typescript 
-class Account{
+   class Account{
     id : number;
     name : string;
     balance : number;
@@ -333,7 +333,15 @@ class Account{
     }   
     
 }
+// using the new operator to create an object from the class
+let account =new Account(1,"ali",1000);
+account.deposit(500);
 
+console.log(account instanceof Account)
+console.log(account)
+```
+// creatin opjects
+// using the new operator we can create instance of existing class 
 let account =new Account(1,"ali",1000);
 account.deposit(500);
 
