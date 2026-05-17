@@ -398,8 +398,54 @@ console.log("hello word ")
 
 
 ## 5. Parameter Properties 
-   ** ?? 
-## 6. classes
+   ###### idea 
+         when we create class with peoperties we create the propertis detect it level visisbility using readonly private protected and public then we init in iside the constructor this behaviour is so repetitve the better way is in the example
+  ###### example 
+       ``` typescript 
+       class Account {
+
+    // we cant change this property we can only init it fron constructor
+//    readonly id:number ;
+    // owner: string ;
+    // 
+    // private _balance: number ;
+    nickname?:string
+    
+    constructor(public readonly id:number,public owner:string,private _balance:number){
+        // this.id=id;
+        // this.owner=owner;
+        // this._balance=balance;
+    }
+    deposite(amount : number){
+        if (amount <= 0){
+            throw new Error("amount must be greater than zero")
+        }
+        this._balance +=amount;
+    }
+    get balance(){
+        return this._balance
+    }
+}
+
+let account = new Account(1,"ali",1000);
+account.deposite(122)
+console.log(account.balance)
+
+       ```       
+## 6. getters and setters 
+
+   ### example 
+   ```typescript
+       get balance(){
+        return this._balance
+    }
+    set balance(value:number){
+        if (value < 0){
+            throw new Error("balance cannot be negative")
+        }
+        this._balance=value;
+    }
+   ```
 ## 7. classes
 ## 8. classes
 ## 9. classes

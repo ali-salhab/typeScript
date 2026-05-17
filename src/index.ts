@@ -239,16 +239,16 @@
 class Account {
 
     // we cant change this property we can only init it fron constructor
-   readonly id:number ;
-    owner: string ;
+//    readonly id:number ;
+    // owner: string ;
     // 
-    private _balance: number ;
+    // private _balance: number ;
     nickname?:string
     
-    constructor(id:number,owner:string,balance:number){
-        this.id=id;
-        this.owner=owner;
-        this._balance=balance;
+    constructor(public readonly id:number,public owner:string,private _balance:number){
+        // this.id=id;
+        // this.owner=owner;
+        // this._balance=balance;
     }
     deposite(amount : number){
         if (amount <= 0){
@@ -258,6 +258,12 @@ class Account {
     }
     get balance(){
         return this._balance
+    }
+    set balance(value:number){
+        if (value < 0){
+            throw new Error("balance cannot be negative")
+        }
+        this._balance=value;
     }
 }
 
