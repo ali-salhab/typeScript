@@ -278,6 +278,7 @@ reject("kkkkkk");
 console.log("hello word ")
 
 # section 4 : object-oriented programming
+** what we will lean ?? **
  1. intoduction to oop 
  2. classes 
  3. constructors 
@@ -300,8 +301,45 @@ console.log("hello word ")
 
    example of object 
    ![alt text](image-2.png)
-  object conatin  properties and methods  is function inside class or object 
+  object conatin  properties and methods ( any function inside class or object called method)
 ## 2. classes
+   ** creating Classes **
+   A class is a blueprint for creating objects 
+   we can define class in typescript and we can use it to create objects
+    we use pascal name convention for class name so that we capitalize the first letter of each word in the class name
+ 
+
+
+   ```typescript 
+class Account{
+    id : number;
+    name : string;
+    balance : number;
+
+    constructor(id:number,name:string,balance:number){
+        this.id=id;
+        this.name=name;
+        this.balance=balance;
+    }
+
+    // any function create inside class we call it method 
+    deposit(amount:number):void{
+        if (amount <= 0){
+            throw new Error("amount must be greater than zero")
+        }else{
+        this.balance +=amount;
+
+        }
+    }   
+    
+}
+
+let account =new Account(1,"ali",1000);
+account.deposit(500);
+
+console.log(account)
+```
+
 ## 3. classes
 ## 4. classes
 ## 5. classes

@@ -170,16 +170,63 @@
 
 
 // we annoutaed this function with never to tell the compiler this function will never return 
-function processEvents():never{
-    while (true){
-        console.log("processing")
-    }
-}
+// function processEvents():never{
+//     while (true){
+//         console.log("processing")
+//     }
+// }
 
-function reject(message:string):never{
-    throw new Error(message)
-}
-processEvents();
-reject("kkkkkk");
-// this line will never executed 
-console.log("hello word ")
+// function reject(message:string):never{
+//     throw new Error(message)
+// }
+// processEvents();
+// reject("kkkkkk");
+// // this line will never executed 
+// console.log("hello word ")function processEvents():never{
+//     while (true){
+//         console.log("processing")
+//     }
+// }
+
+// function reject(message:string):never{
+//     throw new Error(message)
+// }
+// processEvents();
+// reject("kkkkkk");
+// // this line will never executed 
+// console.log("hello word ")
+
+
+
+// classses in typescript
+// we can define class in typescript and we can use it to create objects
+// we use pascal name convention for class name so that we capitalize the first letter of each word in the class name
+// 
+
+// class Account{
+//     id : number;
+//     name : string;
+//     balance : number;
+
+//     constructor(id:number,name:string,balance:number){
+//         this.id=id;
+//         this.name=name;
+//         this.balance=balance;
+//     }
+
+//     // any function create inside class we call it method 
+//     deposit(amount:number):void{
+//         if (amount <= 0){
+//             throw new Error("amount must be greater than zero")
+//         }else{
+//         this.balance +=amount;
+
+//         }
+//     }   
+    
+// }
+
+// let account =new Account(1,"ali",1000);
+// account.deposit(500);
+
+// console.log(account)
