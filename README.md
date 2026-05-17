@@ -44,7 +44,8 @@ for example if we create vraiable of type number and assign to it number the com
 console.log(Sizes.Large)
  ## 6. functions   
  ### - example 
- function CalculateTax(income:number=12):number | undefined{
+ ``` typescript
+function CalculateTax(income:number=12):number | undefined{
     let x=0;
     if ((income || 2022) < 50_000){
         return income* 45 + x;
@@ -54,12 +55,14 @@ console.log(Sizes.Large)
 }
 
 let x = CalculateTax();
-console.log(x)  
+console.log(x)
+```
 we can detect the type of returned type of the function if we dont detect it it can return any thing 
 we can make parameters optional by mark the parameter using ? oprerator in this situation any block in the function will face the error to of be the parameter undefinned we solve it by pass to it default value or by usinh this methof (ParaValue || 2022 )
     
 ## 7. objects 
 ### - example 1
+``` typescript
    let employee:{
     id:number,
     name?:string
@@ -75,7 +78,7 @@ let employee:{
 }}
 employee.name="12";
 employee.retire(new Date())
-
+```
 
 ### - detials 
  this how we define object in java script 
