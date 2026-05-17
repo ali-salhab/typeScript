@@ -94,11 +94,12 @@ employee.retire(new Date())
 ## 1. Type Aliases
     DRY principale mean Dont Repeat your Self 
     when we crate the employee obect in the last section we creat object to annotate the shape of th object 
-    :{id:number,name?:string,retire:(date:Date)=>void}
+    `:{id:number,name?:string,retire:(date:Date)=>void}`
     when we need to create new object we will repeate this section 
     using type aliases we can define custom type 
 ## example : 
   
+      ``` typescript
    type Employee = {
   readonly  id:number,
     name?:string,
@@ -107,8 +108,9 @@ employee.retire(new Date())
 let employee: Employee= {id:1,retire:(date:Date)=>{
     console.log(date)
 }}
-employee.name="12";
-employee.retire(new Date())
+    employee.name="12";
+   employee.retire(new Date())
+   ```
 
 ## 2. Union Type 
  - using union type we can give function or variable more than one type
