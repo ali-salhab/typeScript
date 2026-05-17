@@ -1,11 +1,11 @@
-# TypeScript Course Reference 📚
+# TypeScript Course Reference ✈️
 
 
-# section 1  intoduction to type script 
+# section 1  intoduction to type script 🥈
 ## 1.what is typescript ?
  - typescript is a programing language build on the top of javascript 
 ![alt text](image.png)
-## 2. benifites 
+## 2. benifites 🍱
 1. static typing 
  any programming language eaither statically typing or dynamically typing the type of vaiables is detected throw compile time 
  statically-typed : C++ c# Java
