@@ -466,7 +466,12 @@ class Square extends Shape {
 
 ```
 
-### 11. Interfaces
+### 11. Method Overriding 
+   
+
+
+### 12. Interfaces
+
 
 Interfaces define the exact **contract/shape** of an object or class without any implementation logic. Classes implement interfaces using the `implements` keyword.
 
@@ -482,7 +487,5 @@ class GoogleCalendar implements Calendar {
 }
 
 ```
-
-```</HTMLInputElement>
 
 ```
