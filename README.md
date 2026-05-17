@@ -1,9 +1,10 @@
-تفضل، هذا هو الملف كاملًا بصيغة **Markdown** الجاهزة للنسخ واللصق مباشرة في ملف `README.md` الخاص بك على GitHub.
 
-```markdown
 # ✈️ TypeScript Mastery Course Reference
 
 Welcome to my personal TypeScript reference guide. This repository serves as a comprehensive cheatsheet and memory jogger for TypeScript development, covering everything from basic types to Advanced Object-Oriented Programming (OOP).
+
+👤 **Author:** [Ali Salhab (ali-salhab)](https://github.com/ali-salhab)
+📅 **Status:** In Progress / Learning Journey
 
 ---
 
@@ -343,7 +344,25 @@ class BankAccount {
 ### 6. Static Members
 
 Properties or methods that belong to the **Class itself**, rather than any specific instantiated object.
+```typescript
+// static members in class
+class Ride {
+    static activeRides:number = 0;
 
+static start(){
+    this.activeRides++;
+}
+static stop(){
+    this.activeRides--;
+}
+
+}
+
+Ride.start();
+Ride.start();
+console.log(Ride.activeRides)
+
+```
 ```typescript
 class Circle {
     static pi = 3.14;
@@ -374,7 +393,7 @@ room.A2 = "Omar";
 ### 8. Inheritance
 
 The ability to reuse code by creating a new class (subclass) based on an existing class (parent class) using the `extends` keyword.
-
+![alt text](image-3.png)
 ```typescript
 class Person {
     constructor(public firstName: string, public lastName: string) {}
@@ -386,6 +405,36 @@ class Student extends Person {
         super(firstName, lastName); // Calls parent constructor
     }
 }
+
+```
+```typescript
+// inheritance
+// parent/Base/super class 
+class Person{
+    constructor(public firstName:string,public lastName:string){
+
+    }
+ get fullName(){
+    return this.firstName + " " + this.lastName;
+ }
+
+ walk ()
+{
+    console.log("walking")
+}
+}
+
+// child/derived/sub class
+class Student extends Person{
+    constructor(firstName:string,lastName:string,public studentId:number){
+        // here we call the constructor of the parent class to initialize the firstName and lastName properties
+    super(firstName,lastName)
+    }
+}
+
+let student = new Student("ali","mohamed",11232);
+console.log(student.fullName)
+student.walk()
 
 ```
 

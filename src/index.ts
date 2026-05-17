@@ -236,37 +236,85 @@
 
 
 
-class Account {
+// class Account {
 
-    // we cant change this property we can only init it fron constructor
-//    readonly id:number ;
-    // owner: string ;
-    // 
-    // private _balance: number ;
-    nickname?:string
+//     // we cant change this property we can only init it fron constructor
+// //    readonly id:number ;
+//     // owner: string ;
+//     // 
+//     // private _balance: number ;
+//     nickname?:string
     
-    constructor(public readonly id:number,public owner:string,private _balance:number){
-        // this.id=id;
-        // this.owner=owner;
-        // this._balance=balance;
-    }
-    deposite(amount : number){
-        if (amount <= 0){
-            throw new Error("amount must be greater than zero")
-        }
-        this._balance +=amount;
-    }
-    get balance(){
-        return this._balance
-    }
-    set balance(value:number){
-        if (value < 0){
-            throw new Error("balance cannot be negative")
-        }
-        this._balance=value;
-    }
-}
+//     constructor(public readonly id:number,public owner:string,private _balance:number){
+//         // this.id=id;
+//         // this.owner=owner;
+//         // this._balance=balance;
+//     }
+//     deposite(amount : number){
+//         if (amount <= 0){
+//             throw new Error("amount must be greater than zero")
+//         }
+//         this._balance +=amount;
+//     }
+//     get balance(){
+//         return this._balance
+//     }
+//     set balance(value:number){
+//         if (value < 0){
+//             throw new Error("balance cannot be negative")
+//         }
+//         this._balance=value;
+//     }
+// }
 
-let account = new Account(1,"ali",1000);
-account.deposite(122)
-console.log(account.balance)
+// let account = new Account(1,"ali",1000);
+// account.deposite(122)
+// console.log(account.balance)
+
+
+// static members in class
+// class Ride {
+//     static activeRides:number = 0;
+
+// static start(){
+//     this.activeRides++;
+// }
+// static stop(){
+//     this.activeRides--;
+// }
+
+// }
+
+// Ride.start();
+// Ride.start();
+// console.log(Ride.activeRides)
+
+
+
+// // inheritance
+// // parent/Base/super class 
+// class Person{
+//     constructor(public firstName:string,public lastName:string){
+
+//     }
+//  get fullName(){
+//     return this.firstName + " " + this.lastName;
+//  }
+
+//  walk ()
+// {
+//     console.log("walking")
+// }
+// }
+
+// // child/derived/sub class
+// class Student extends Person{
+//     constructor(firstName:string,lastName:string,public studentId:number){
+//         // here we call the constructor of the parent class to initialize the firstName and lastName properties
+//     super(firstName,lastName)
+//     }
+// }
+
+// let student = new Student("ali","mohamed",11232);
+// console.log(student.fullName)
+// student.walk()
