@@ -231,3 +231,36 @@
 
 // console.log(account instanceof Account)
 // console.log(account)
+
+
+
+
+
+class Account {
+
+    // we cant change this property we can only init it fron constructor
+   readonly id:number ;
+    owner: string ;
+    // 
+    private _balance: number ;
+    nickname?:string
+    
+    constructor(id:number,owner:string,balance:number){
+        this.id=id;
+        this.owner=owner;
+        this._balance=balance;
+    }
+    deposite(amount : number){
+        if (amount <= 0){
+            throw new Error("amount must be greater than zero")
+        }
+        this._balance +=amount;
+    }
+    get balance(){
+        return this._balance
+    }
+}
+
+let account = new Account(1,"ali",1000);
+account.deposite(122)
+console.log(account.balance)

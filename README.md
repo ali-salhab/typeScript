@@ -100,16 +100,16 @@ employee.retire(new Date())
 ## example : 
   
       ```typescript
-       type Employee = {
-          readonly  id:number,
-              name?:string,
-         retire : (date:Date)=> void
-             }
-              let employee: Employee= {id:1,retire:(date:Date)=>{
-           console.log(date)
-          }}
-            employee.name="12";
-          employee.retire(new Date())
+   type Employee = {
+  readonly  id:number,
+    name?:string,
+    retire : (date:Date)=> void
+}
+let employee: Employee= {id:1,retire:(date:Date)=>{
+    console.log(date)
+}}
+    employee.name="12";
+   employee.retire(new Date())
    ```
 
 ## 2. Union Type 
@@ -310,7 +310,7 @@ console.log("hello word ")
  
 
 
-   ```typescript 
+```typescript 
    class Account{
     id : number;
     name : string;
@@ -332,25 +332,73 @@ console.log("hello word ")
         }
     }   
     
-}
-// using the new operator to create an object from the class
-let account =new Account(1,"ali",1000);
-account.deposit(500);
+  }
+  // using the new operator to create an object from the class
+    let account =new Account(1,"ali",1000);
+    account.deposit(500);
 
-console.log(account instanceof Account)
-console.log(account)
-```
-// creatin opjects
-// using the new operator we can create instance of existing class 
-let account =new Account(1,"ali",1000);
-account.deposit(500);
+   console.log(account instanceof Account)
+  console.log(account)
+  
+  //  creatin opjects
+  // using the new operator we can create instance of existing class 
+  let account =new Account(1,"ali",1000);
+  account.deposit(500);
 
-console.log(account)
-```
+    console.log(account)
+  ```
 
-## 3. classes
-## 4. classes
-## 5. classes
+## 3. Read-Only and Optional Properties 
+   * exmple *
+   in the previous examlle we can change the id of the user in any lcaton of our programm and this may lead to bug in our program to solve this problem we use the ** readonly modifier ** now we can only chage the id inside the constructor 
+
+   if we need add optional propertie we can use ? operator 
+   like this 
+   `nickName?:string ;`
+
+## 4. Access Control Keywords :
+   1. public : 
+      any defined properties and functions is bydefault public we can access it from anywhere 
+   2. private 
+      we can access it inside the class only 
+   3. protected 
+      we can access it inside the class and and other class extend this class which contain this protected properties 
+
+    ```typescript
+
+      class Account {
+
+    // we cant change this property we can only init it fron constructor
+      readonly id:number ;
+      owner: string ;
+    // 
+      private _balance: number ;
+      nickname?:string
+    
+      constructor(id:number,owner:string,balance:number){
+        this.id=id;
+        this.owner=owner;
+        this._balance=balance;
+    }
+    deposite(amount : number){
+        if (amount <= 0){
+            throw new Error("amount must be greater than zero")
+        }
+        this._balance +=amount;
+    }
+    get balance(){
+        return this._balance
+    }
+     }
+
+    let account = new Account(1,"ali",1000);
+       account.deposite(122)
+        console.log(account.balance)
+      ```
+
+
+## 5. Parameter Properties 
+   ** ?? 
 ## 6. classes
 ## 7. classes
 ## 8. classes
