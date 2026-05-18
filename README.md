@@ -265,6 +265,7 @@ function processEvents(): never {
 
 ## 🏛️ Section 4: Object-Oriented Programming (OOP)
 
+
 ### 1. What is OOP?
 
 Object-Oriented Programming is a paradigm centered around **Objects** containing data (properties) and logic/functions (methods). JavaScript and TypeScript natively support both OOP and Functional Programming styles.
@@ -442,6 +443,57 @@ student.walk()
 
 "Many forms". Allows subclasses to provide their own specific implementation of a method that is already defined in their parent class (Method Overriding).
 
+```typescript 
+class Person{
+    constructor(public firstName:string,public lastName:string){
+
+    }
+ get fullName(){
+    return this.firstName + " " + this.lastName;
+ }
+
+ walk ()
+{
+    console.log("walking")
+}
+}
+
+// child/derived/sub class
+class Student extends Person{
+    constructor(firstName:string,lastName:string,public studentId:number){
+        // here we call the constructor of the parent class to initialize the firstName and lastName properties
+    super(firstName,lastName)
+    }
+
+
+}
+
+
+class Teacher extends Person{
+    constructor(firstName:string,lastName:string,public teacherId:number){
+        super(firstName,lastName)
+    }  
+    teach(){
+        console.log("teaching")
+    }
+
+
+    override get fullName(){
+        return "Dr. " + super.fullName;
+    }
+}
+
+// here for every iteration will call full name difference and this is polimorphism in action
+// why this is soo powerfull? 
+//  because tomorow we can create new class without any change to the printname function we can add this new created class objects to our array 
+// this call open closed pricilpe 
+// classes should be open for extensions and closed for modifications
+function printNames(persons:Person[]){
+    for (let person of persons){
+        console.log(person.fullName)
+    }
+}
+```
 ```typescript
 class Teacher extends Person {
     override get fullName() {
@@ -454,7 +506,9 @@ class Teacher extends Person {
 ### 10. Abstract Classes & Methods
 
 An abstract class acts strictly as a blueprint and **cannot be instantiated** with `new`. Abstract methods inside it have no implementation body and **must** be implemented by subclasses.
-
+**  **
+we cant create instances from abstract class 
+absract classes is created to be  inherted 
 ```typescript
 abstract class Shape {
     abstract render(): void;
@@ -467,24 +521,206 @@ class Square extends Shape {
 ```
 
 ### 11. Method Overriding 
-   
+   ```typescript
+
+class Teacher extends Person{
+    constructor(firstName:string,lastName:string,public teacherId:number){
+        super(firstName,lastName)
+    }  
+    teach(){
+        console.log("teaching")
+    }
+
+
+    override get fullName(){
+        return "Dr. " + super.fullName;
+    }
+}
+let teacher = new Teacher("mohamed","ali",1234);
+console.log(teacher.fullName)
+teacher.walk()
+teacher.teach()
+console.log(teacher.firstName)
+let student = new Student("ali","mohamed",11232);
+console.log(student.fullName)
+student.walk()
+
+   ```
 
 
 ### 12. Interfaces
 
 
 Interfaces define the exact **contract/shape** of an object or class without any implementation logic. Classes implement interfaces using the `implements` keyword.
+- interface can be used to define the shape of an object and it can be implemented by a class 
+- classes is a blueprint for creating objects and it can contain properties and methods
+
+- what the differences between abstract classes and interfaces
+ 1- abstract classes can contain implementation for some methods but interfaces cannot contain any implementation 
+ 2- a class can implement multiple interfaces but it can only extend one abstract class 
+3- abstract classes can have constructors but interfaces cannot have constructors
 
 ```typescript
-interface Calendar {
-    name: string;
-    addEvent(): void;
+
+
+
+interface Calendar{
+    name:string;
+    addEvent():void;
+    removeEvent():void;
+}
+interface CloudCalender extends Calender{
+    sync():void
+}
+class OutlookCalender implements Calendar{
+    constructor(public name:string){}
+
+    addEvent(): void {
+        console.log("here we add event to outlook calender")
+    }
+    removeEvent(): void {
+        console.log("here we remove event from outlook calender")
+    }
+
 }
 
-class GoogleCalendar implements Calendar {
-    constructor(public name: string) {}
-    addEvent(): void { console.log("Event added."); }
+class GoogleCalender implements Calendar{
+    constructor(public name:string){}
+
+    addEvent(): void {
+        console.log("here we add event to google calender")
+    }
+    removeEvent(): void {
+        console.log("here we remove event from google calender")
+    }
+
 }
+
+
+```
+
+## 🧬 Section 5: Generics
+
+### 1. What are Generics?
+Generics allow us to create **reusable code blocks** (classes, functions, interfaces) Scientific-style that can work with a variety of types rather than a single fixed type. It provides type safety without sacrificing flexibility.
+
+### 2. Generic Classes
+Instead of creating different classes for different types of data, we can pass the type as a parameter using the `<T>` syntax (where `T` stands for Type).
+
+```typescript
+class KeyValuePair<K, V> {
+    constructor(public key: K, public value: V) {}
+}
+
+// Explicitly setting types
+let pair1 = new KeyValuePair<number, string>(1, "Ali");
+
+// TypeScript can also infer the types automatically
+let pair2 = new KeyValuePair("ID", 101); 
+
+```
+
+### 3. Generic Functions
+
+Functions can also accept generic type parameters. This is highly useful for utility functions that manipulate different data structures.
+
+```typescript
+class ArrayUtils {
+    // A generic method that wraps any element into an array
+    static wrapInArray<T>(value: T): T[] {
+        return [value];
+    }
+}
+
+let numbersArray = ArrayUtils.wrapInArray(55); // inferred as number[]
+let stringsArray = ArrayUtils.wrapInArray("TypeScript"); // inferred as string[]
+
+```
+
+### 4. Generic Interfaces
+
+Interfaces can use generic types to enforce shapes on API responses, repositories, or generic data structures.
+
+```typescript
+// Reusable API response template
+interface Result<T> {
+    data: T | null;
+    error: string | null;
+}
+
+interface User { name: string; email: string; }
+interface Product { title: string; price: number; }
+
+// Using the same interface for totally different data shapes
+let userResult: Result<User> = { data: { name: "Ali", email: "ali@mail.com" }, error: null };
+let productResult: Result<Product> = { data: { title: "Laptop", price: 999 }, error: null };
+
+```
+
+### 5. Generic Constraints
+
+Sometimes, you don't want a generic to accept *any* type. You can restrict (constrain) the valid types using the `extends` keyword.
+
+```typescript
+// Constraint 1: Limit to numbers or strings only
+class Echo<T extends number string |> {
+    echo(value: T) { return value; }
+}
+
+// Constraint 2: Limit to an object shape
+interface Shape {
+    name: string;
+}
+function printShapeName<T Shape extends>(obj: T): void {
+    console.log(obj.name);
+}
+
+// Constraint 3: Limiting by an existing class
+class Person { constructor(public name: string) {} }
+class Customer extends Person {}
+
+function echoPerson<T Person extends>(person: T): T {
+    return person;
+}
+
+```
+
+### 6. The `keyof` Operator & Mapping Types
+
+The `keyof` operator takes an object type and produces a string or numeric literal union of its keys. This allows us to map dynamically over object keys safely.
+
+```typescript
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+}
+
+class Store<T> {
+    // Ensures that the 'key' parameter is strictly a valid property name of type T
+    findProperty<K T extends keyof>(obj: T, key: K) {
+        return obj[key];
+    }
+}
+
+```
+
+### 7. Type Mapping (Mapped Types)
+
+Mapped types allow you to build new types based on old ones by transforming each property in the old type.
+
+```typescript
+type ReadOnlyProduct = {
+    // Loops through all keys of Product and makes them readonly
+    readonly [K in keyof Product]: Product[K];
+}
+
+type OptionalProduct = {
+    // Loops through all keys of Product and makes them optional
+    [K in keyof Product]?: Product[K];
+}
+
+```
 
 ```
 

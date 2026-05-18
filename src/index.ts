@@ -291,8 +291,8 @@
 
 
 
-// // inheritance
-// // parent/Base/super class 
+// inheritance
+// parent/Base/super class 
 // class Person{
 //     constructor(public firstName:string,public lastName:string){
 
@@ -313,8 +313,108 @@
 //         // here we call the constructor of the parent class to initialize the firstName and lastName properties
 //     super(firstName,lastName)
 //     }
+
+
 // }
 
-// let student = new Student("ali","mohamed",11232);
-// console.log(student.fullName)
-// student.walk()
+
+// class Teacher extends Person{
+//     constructor(firstName:string,lastName:string,public teacherId:number){
+//         super(firstName,lastName)
+//     }  
+//     teach(){
+//         console.log("teaching")
+//     }
+
+
+//     override get fullName(){
+//         return "Dr. " + super.fullName;
+//     }
+// }
+
+// // here for every iteration will call full name difference and this is polimorphism in action
+// function printNames(persons:Person[]){
+//     for (let person of persons){
+//         console.log(person.fullName)
+//     }
+// }
+
+
+
+// abstract classes 
+
+
+
+
+// abstract class Shape{
+//     constructor(public color:string){}
+
+// // here in this level we dont know the shape so we cant render it to solve this problem we use abstract method we define the shape of the method and letter define its implementation in the subclass
+//    abstract render():void
+// }
+
+// class Circle extends Shape{
+//     constructor(public radius:number ,color:string){
+//         super(color)
+//     }
+//   override  render(){
+//         console.log("here we render a circle ")
+//     }
+// }
+
+// let shape = new Shape();
+
+// let circle=new Circle(1,"red")
+// circle.render();
+
+
+// interfaces in typescript
+// interface can be used to define the shape of an object and it can be implemented by a class 
+// classes is a blueprint for creating objects and it can contain properties and methods
+
+
+abstract class Calender{
+    constructor(public name:string){}
+
+  abstract  addEvent():void
+   abstract removeEvent():void
+
+}
+
+interface Calendar{
+    name:string;
+    addEvent():void;
+    removeEvent():void;
+}
+
+class OutlookCalender implements Calendar{
+    constructor(public name:string){}
+
+    addEvent(): void {
+        console.log("here we add event to outlook calender")
+    }
+    removeEvent(): void {
+        console.log("here we remove event from outlook calender")
+    }
+
+}
+
+class GoogleCalender implements Calendar{
+    constructor(public name:string){}
+
+    addEvent(): void {
+        console.log("here we add event to google calender")
+    }
+    removeEvent(): void {
+        console.log("here we remove event from google calender")
+    }
+
+}
+
+
+
+
+// what the differences between abstract classes and interfaces
+// 1- abstract classes can contain implementation for some methods but interfaces cannot contain any implementation 
+// 2- a class can implement multiple interfaces but it can only extend one abstract class 
+// 3- abstract classes can have constructors but interfaces cannot have constructors
